@@ -22,6 +22,8 @@ public class DB_sqlite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table mytable ( id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT,password TEXT," +
                 " savedata TEXT, email TEXT, type TEXT, adress TEXT, phone TEXT, gender TEXT,save TEXT)");
+        db.execSQL("create table notfiy (id INTEGER PRIMARY KEY AUTOINCREMENT, numb INTEGER,enableb INTEGER,numn INTEGER,enablen INTEGER)");
+
 
 
         ContentValues contentValues = new ContentValues();
@@ -35,11 +37,19 @@ public class DB_sqlite extends SQLiteOpenHelper {
         contentValues.put("gender", "null");
         contentValues.put("save", "0");
         db.insert("mytable", null, contentValues);
+
+        ContentValues contentValues1 = new ContentValues();
+        contentValues1.put("numb",0);
+        contentValues1.put("enableb",0);
+        contentValues1.put("numn",0);
+        contentValues1.put("enablen",0);
+        db.insert("notfiy",null ,contentValues1);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS mytable");
+        db.execSQL("DROP TABLE IF EXISTS notfiy");
         onCreate(db);
 
     }
@@ -193,6 +203,32 @@ public class DB_sqlite extends SQLiteOpenHelper {
 
         return  true ;
     }
+
+
+
+
+
+    public int get_numb() {
+        int num ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select numb from notfiy ", null);
+        res.moveToFirst();
+        num = res.getInt(res.getColumnIndex("numb"));
+        return num;
+    }
+
+
+    public boolean updateData_notfiy_numb(int num ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues1 = new ContentValues();
+        contentValues1.put("numb", num);
+
+
+        db.update("notfiy", contentValues1, "id= ?", new String[]{"1"});
+
+        return true;
+    }
+
 
 
 }

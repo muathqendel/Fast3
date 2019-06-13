@@ -10,7 +10,9 @@
     <color name="dark_blue">#0247FA</color>
     <color name="orange">#FF5722</color>
     <color name="Red">#FF0600</color>
+    <color name="black">#000000</color>
 
 
     <color name="cardview_light_background">#AAFFFFFF</color>
 </resources>
+

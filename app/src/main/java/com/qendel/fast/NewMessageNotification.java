@@ -42,7 +42,7 @@ public class NewMessageNotification {
      * @see #cancel(Context)
      */
     public static void notify(final Context context,
-                              final String exampleString, final int number) {
+                              final String exampleString, final String txt, final String title,final int number) {
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail).
@@ -51,10 +51,7 @@ public class NewMessageNotification {
 
 
         final String ticker = exampleString;
-        final String title = res.getString(
-                R.string.new_message_notification_title_template, exampleString);
-        final String text = res.getString(
-                R.string.new_message_notification_placeholder_text_template, exampleString);
+
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
@@ -66,7 +63,7 @@ public class NewMessageNotification {
                 // notification title, and text.
                 .setSmallIcon(R.drawable.ic_stat_new_message)
                 .setContentTitle(title)
-                .setContentText(text)
+                .setContentText(txt)
 
                 // All fields below this line are optional.
 
@@ -106,7 +103,7 @@ public class NewMessageNotification {
                 // Show expanded text content on devices running Android 4.1 or
                 // later.
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text)
+                        .bigText(title)
                         .setBigContentTitle(title)
                         .setSummaryText("Dummy summary text"))
 

@@ -26,4 +26,8 @@
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
+
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="Waite">Wait</string>
+
 </resources>

@@ -15,6 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"></service>
+
         <activity android:name=".jobs" />
         <activity android:name=".help" />
         <activity android:name=".Tasker" />
@@ -27,6 +31,7 @@
         <activity android:name=".Main4Activity" />
         <activity android:name=".Main3Activity" />
         <activity android:name=".Main2Activity" />
+        <activity android:name=".no_connection" />
         <activity android:name=".Registeration2" />
         <activity android:name=".Registeration" />
         <activity android:name=".login" />
@@ -38,6 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".MyBroudCast">
+            <intent-filter>
+                <action android:name="com.example.Broadcast.fast" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
