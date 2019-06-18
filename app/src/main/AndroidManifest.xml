@@ -15,9 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".services2"></activity>
+        <activity android:name=".services" />
+
         <service
             android:name=".MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity android:name=".jobs" />
         <activity android:name=".help" />

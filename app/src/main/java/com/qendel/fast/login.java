@@ -55,7 +55,7 @@ public class login extends AppCompatActivity {
                 if(type.equals("1")) {
                     startActivity(new Intent(login.this, Main2Activity.class));
                 }else if (type.equals("0")){
-                    startActivity(new Intent(login.this, Main3Activity.class));
+                    startActivity(new Intent(login.this, Main5Activity.class));
                 }
 
 
@@ -155,7 +155,7 @@ public class login extends AppCompatActivity {
                         Toast.makeText(login.this, "تم  تسجيل الدخول", Toast.LENGTH_SHORT).show();
                         db.updateData_Login(Log_in_name, Log_in_Password, save_data);
                         db.update_save("contactf");
-                        startActivity(new Intent(login.this, Main3Activity.class));
+                        startActivity(new Intent(login.this, Main5Activity.class));
 
                     } else {
                         Toast.makeText(login.this, "البيانات غير صحيحة", Toast.LENGTH_SHORT).show();

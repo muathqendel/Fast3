@@ -3,7 +3,6 @@ package com.qendel.fast;
 /**
  * Created by hp on 05/09/2018.
  */
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
