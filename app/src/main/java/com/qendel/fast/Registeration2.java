@@ -47,8 +47,6 @@ public class Registeration2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration2);
 
-        Intent data = getIntent();
-        type = data.getExtras().getString("type");
 
         imageView = (ImageView) findViewById(R.id.img_user);
         checkBox_save_data_r = (CheckBox) findViewById(R.id.checkBox_save_data_r);

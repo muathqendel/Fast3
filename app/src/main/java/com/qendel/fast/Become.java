@@ -1,12 +1,14 @@
 package com.qendel.fast;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -14,84 +16,49 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-import android.support.v7.app.AppCompatActivity;
+public class Become extends AppCompatActivity {
 
-public class Registeration extends AppCompatActivity {
-
-
-    EditText editText_username_r, editText_email_r, editText_pass_r, editText_pass2_r, editText_ip, editText_adress;
-    DB_sqlite db;
-    String save_data;
-    CheckBox checkBox_save_data_r,checkBox_sign;
-    String Check;
-    ImageView imageView;
-    String imagecode;
-    String type;
-    RadioGroup radioGroup;
-    RadioButton radioButton;
-    String sex = "",sure= "0";
-    private static final String TAG = "Registration";
-
+    CheckBox checkBox_sign;
 
     EditText editText_info;
     TextView textView_choose,textView_choose2;
     String choose,choose1,choose3,choose4;
-
-
+    String sure= "0";
+    DB_sqlite db;
+    private ProgressDialog progressDialog;
+    RequestQueue requestQueue;
+    String username,phone,email,location,info,img,id,passs,genderr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registeration);
-
-
-
-        imageView = (ImageView) findViewById(R.id.img_user);
-        checkBox_save_data_r = (CheckBox) findViewById(R.id.checkBox_save_data_r);
-        editText_username_r = (EditText) findViewById(R.id.editText_username_r);
-        editText_email_r = (EditText) findViewById(R.id.editText_email_r);
-        editText_pass_r = (EditText) findViewById(R.id.editText_pass_r);
-        editText_pass2_r = (EditText) findViewById(R.id.editText_pass2_r);
-        editText_ip = (EditText) findViewById(R.id.editText_ip);
-        editText_adress = findViewById(R.id.editText_location);
-
-
+        setContentView(R.layout.activity_become);
 
         editText_info = findViewById(R.id.editText_info);
         textView_choose = findViewById(R.id.textView_choose);
         textView_choose2 = findViewById(R.id.textView_choose2);
         checkBox_sign = (CheckBox) findViewById(R.id.checkBox_sign);
 
-        radioGroup = findViewById(R.id.radio_group);
-
-
         db = new DB_sqlite(this);
-        checkBox_save_data_r.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    save_data = "1";
+        progressDialog = new ProgressDialog(this);
 
-                } else {
-                    save_data = "0";
-
-                }
-            }
-        });
 
         checkBox_sign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -104,89 +71,32 @@ public class Registeration extends AppCompatActivity {
             }
         });
 
-
-
+        if(db.get_alldata().equals("0")){
+            get_data_user();
+        }
     }
 
-
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
-
-
-    public void sign_up2(View view) {
-
-
-        final String Ename = editText_username_r.getText().toString().trim();
-        final String Email = editText_email_r.getText().toString().trim();
-        final String Pass = editText_pass_r.getText().toString().trim();
-        final String ip = editText_ip.getText().toString().trim();
-        String Pass2 = editText_pass2_r.getText().toString().trim();
-        final String adress = editText_adress.getText().toString().trim();
+    public void Become(View view){
 
         final String info = editText_info.getText().toString().trim();
 
 
-        /// to convert image to string
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream); /// 100 % quality from image
-        imagecode = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
 
+        if(choose.equals("")){
 
-
-        if (!Pass.equals(Pass2)) {
-
-            Toast.makeText(Registeration.this, "Please write password correctly", Toast.LENGTH_LONG).show();
-
-        }else if(Ename.equals("")) {
-
-            Toast.makeText(Registeration.this, "please write your username", Toast.LENGTH_LONG).show();
-
-        }
-        else if(Email.equals("")) {
-
-            Toast.makeText(Registeration.this, "please write your email", Toast.LENGTH_LONG).show();
-        }
-        else if(!Email.contains("@")) {
-
-            Toast.makeText(Registeration.this, "please choose correct email", Toast.LENGTH_LONG).show();
-        }
-        else if(Pass.equals("")) {
-
-            Toast.makeText(Registeration.this, "please write your password", Toast.LENGTH_LONG).show();
-        }else if(ip.length() != 10 && ip.length() != 12 && ip.length() != 14 ){
-
-            Toast.makeText(Registeration.this, "Please write Phone Number correctly", Toast.LENGTH_LONG).show();
-
-        }else if(editText_pass_r.length() < 8){
-
-            Toast.makeText(Registeration.this, "the password must have 8 Symbols at least", Toast.LENGTH_LONG).show();
-
-        }else if(sex.equals("")) {
-
-            Toast.makeText(Registeration.this, "please select your gender", Toast.LENGTH_LONG).show();
-
-        }else if(adress.equals("")){
-
-            Toast.makeText(Registeration.this, "please Write your Address", Toast.LENGTH_LONG).show();
-
-        } else if(choose.equals("")){
-
-            Toast.makeText(Registeration.this, "please Write your Work", Toast.LENGTH_LONG).show();
+            Toast.makeText(Become.this, "please Write your Work", Toast.LENGTH_LONG).show();
 
         } else if(choose3.equals("")){
 
-            Toast.makeText(Registeration.this, "please Write your Work", Toast.LENGTH_LONG).show();
+            Toast.makeText(Become.this, "please Write your Work", Toast.LENGTH_LONG).show();
 
         } else if(info.equals("")){
 
-            Toast.makeText(Registeration.this, "please Write your description", Toast.LENGTH_LONG).show();
+            Toast.makeText(Become.this, "please Write your description", Toast.LENGTH_LONG).show();
 
         } else if(sure.equals("0")) {
 
-            Toast.makeText(Registeration.this, "please check the Terms and Conditions", Toast.LENGTH_LONG).show();
+            Toast.makeText(Become.this, "please check the Terms and Conditions", Toast.LENGTH_LONG).show();
         }else {
 
 
@@ -198,15 +108,12 @@ public class Registeration extends AppCompatActivity {
                         JSONObject jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
                         if (success) {
-                            Toast.makeText(Registeration.this, "successfully registered", Toast.LENGTH_LONG).show();
-                            db.updateData_R(Ename, Pass, save_data, Email,adress,ip,sex);
-                            db.update_save("1");
-                            Intent Opennovel = new Intent(Registeration.this, sure.class);
-                            Opennovel.putExtra("type", type);
+                            Toast.makeText(Become.this, "successfully registered", Toast.LENGTH_LONG).show();
+                            Intent Opennovel = new Intent(Become.this, sure.class);
                             startActivity(Opennovel);
                             finish();
                         } else {
-                            Toast.makeText(Registeration.this, "Excuse me! There is an error or username already exists", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Become.this, "Excuse me! There is an error or username already exists", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -214,54 +121,14 @@ public class Registeration extends AppCompatActivity {
                 }
             };
 
-            Send_Data_Registration send_Data = new Send_Data_Registration(Ename, Email, Pass, ip, imagecode, adress, sex,choose3,info,  responseLisener);
-            RequestQueue queue = Volley.newRequestQueue(Registeration.this);
+            Send_Data_Registration send_Data = new Send_Data_Registration(username, email, passs, phone, img, location, genderr,choose3,info,  responseLisener);
+            RequestQueue queue = Volley.newRequestQueue(Become.this);
             queue.add(send_Data);
         }
-
     }
-
-
-    public void Sign_in(View view) {
-        Intent Opennovel = new Intent(Registeration.this, login.class);
-        Opennovel.putExtra("type",type);
-        startActivity(Opennovel);
-    }
-
-    public void isertimg(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent,100);
-    }
-
-    //// to show this image in imageView
-    protected void onActivityResult (int requstcode, int reslutcode , Intent data){
-        super.onActivityResult(requstcode,reslutcode,data);
-
-        if(requstcode == 100 && reslutcode == RESULT_OK ){
-            Uri uri = data.getData();
-            imageView.setImageURI(uri);
-        }
-    }
-
-    public void checkRadiio(View view) {
-        int RadioId = radioGroup.getCheckedRadioButtonId();
-
-        radioButton = findViewById(RadioId);
-
-        String radioText =  radioButton.getText().toString();
-
-        if(radioText.equals("Female")){
-            sex = "female";
-        }else if (radioText.equals("Male")){
-            sex= "male" ;
-        }
-
-
-    }
-
 
     public void choose(View view) {
-        PopupMenu popupMenu = new PopupMenu(Registeration.this,textView_choose);
+        PopupMenu popupMenu = new PopupMenu(Become.this,textView_choose);
         popupMenu.getMenuInflater().inflate(R.menu.menu_choose,popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -304,7 +171,7 @@ public class Registeration extends AppCompatActivity {
     public void choose2(View view) {
         switch (choose) {
             case "handel": {
-                PopupMenu popupMenu = new PopupMenu(Registeration.this, textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this, textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_handel, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -344,7 +211,7 @@ public class Registeration extends AppCompatActivity {
                 break;
             }
             case "transform": {
-                PopupMenu popupMenu = new PopupMenu(Registeration.this, textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this, textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_transform, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -368,7 +235,7 @@ public class Registeration extends AppCompatActivity {
                 break;
             }
             case "clean": {
-                PopupMenu popupMenu = new PopupMenu(Registeration.this, textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this, textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_clean, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -402,7 +269,7 @@ public class Registeration extends AppCompatActivity {
                 break;
             }
             case "home_develope": {
-                PopupMenu popupMenu = new PopupMenu(Registeration.this, textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this, textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_home_develope, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -433,7 +300,7 @@ public class Registeration extends AppCompatActivity {
                 break;
             }
             case "home_services": {
-                PopupMenu popupMenu = new PopupMenu(Registeration.this, textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this, textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_home_services, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -461,7 +328,7 @@ public class Registeration extends AppCompatActivity {
                 break;
             }
             case "destrial":
-                PopupMenu popupMenu = new PopupMenu(Registeration.this,textView_choose);
+                PopupMenu popupMenu = new PopupMenu(Become.this,textView_choose);
                 popupMenu.getMenuInflater().inflate(R.menu.popupmenu_home_destrial,popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -498,6 +365,80 @@ public class Registeration extends AppCompatActivity {
 
         editText_info.setVisibility(View.VISIBLE);
         textView_choose2.setText(choose4);
+
+    }
+
+    public void get_data_user(){
+        requestQueue = Volley.newRequestQueue(this);
+
+        CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
+        Boolean Ch = cic.isConnectingToInternet();
+        if (!Ch) {
+            Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+        } else {
+            progressDialog.setMessage(getString(R.string.Waite));
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+// عدلها ل user2 من السيرفر
+            String url = "https://fast540.000webhostapp.com/app/get_data_user.php?username="+db.get_username();
+            requestQueue = Volley.newRequestQueue(this);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,
+                    new Response.Listener<JSONObject>(){
+                        @Override
+                        public void  onResponse (JSONObject response){
+                            try {
+                                JSONArray jsonArray = response.getJSONArray("alldata");
+
+                                JSONObject respons = jsonArray.getJSONObject(0);
+                                String id = respons.getString("id");
+                                String username = respons.getString("username");
+                                String password = respons.getString("password");
+                                String email = respons.getString("email");
+                                String phone = respons.getString("phone");
+                                String location = respons.getString("location");
+                                String img = respons.getString("img");
+                                String info = respons.getString("info");
+                                String type = respons.getString("type");
+                                String gender = respons.getString("gender");
+
+                                db.update_alldata("1");
+                                db.save_all_data(id,username,password,email,location,phone,img,info,type,gender);
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            progressDialog.dismiss();
+                            listData2();
+                        }
+                    },new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", "ERROR");
+                }
+            }
+            );
+
+            requestQueue.add(jsonObjectRequest);
+
+
+        }
+
+    }
+
+    public void listData2(){
+        username = db.get_username();
+        phone = db.get_phone();
+        email = db.get_email();
+        location = db.get_adress();
+        info = db.get_info();
+        img = db.get_img();
+        id = db.get_idd();
+        passs = db.get_Password();
+        genderr = db.get_gender();
+
+
 
     }
 }

@@ -34,14 +34,14 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Intent data = getIntent();
-        type = data.getExtras().getString("type") ;
 
         editText_username_log = (EditText) findViewById(R.id.editText_username_log);
         editText_pass_log = (EditText) findViewById(R.id.editText_pass_log);
         checkBox_save_data = (CheckBox) findViewById(R.id.checkBox);
 
         db = new DB_sqlite(this);
+
+        type = db.get_type();
 
         if (db.get_Check() != null) {
             Check = db.get_Check();
@@ -99,11 +99,9 @@ public class login extends AppCompatActivity {
 
         if(type.equals("1")) {
             Intent Opennovel = new Intent(login.this, Registeration.class);
-            Opennovel.putExtra("type",type);
             startActivity(Opennovel);
         }else if (type.equals("0")){
             Intent Opennovel = new Intent(login.this, Registeration2.class);
-            Opennovel.putExtra("type",type);
             startActivity(Opennovel);
         }
 

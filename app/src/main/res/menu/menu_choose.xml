@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/handel"
+        android:title="الاعمال اليدوية"></item>
+
+    <item
+        android:id="@+id/transform"
+        android:title="النقل"></item>
+
+    <item
+        android:id="@+id/clean"
+        android:title="التنظيف"></item>
+
+    <item
+        android:id="@+id/home_develope"
+        android:title="تحسينات"></item>
+
+    <item
+        android:id="@+id/home_services"
+        android:title="خدمات منزلبة"></item>
+
+    <item
+        android:id="@+id/destrial"
+        android:title="المهن الصناعية"></item>
+</menu>

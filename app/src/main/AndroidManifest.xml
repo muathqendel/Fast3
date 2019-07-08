@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -15,14 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".services2"></activity>
-        <activity android:name=".services" />
+        <activity android:name=".Become" />
+        <activity android:name=".sure" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".edit_profile" />
+        <activity android:name=".add_img" />
+        <activity android:name=".Profile" />
+        <activity android:name=".search" />
+        <activity android:name=".taskers" />
+        <activity android:name=".services2" />
 
         <service
             android:name=".MyIntentService"
             android:exported="false" />
 
-        <activity android:name=".jobs" />
         <activity android:name=".help" />
         <activity android:name=".Tasker" />
         <activity android:name=".Setting" />
@@ -31,9 +41,6 @@
             android:name=".Main5Activity"
             android:label="@string/title_activity_main5"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Main4Activity" />
-        <activity android:name=".Main3Activity" />
-        <activity android:name=".Main2Activity" />
         <activity android:name=".no_connection" />
         <activity android:name=".Registeration2" />
         <activity android:name=".Registeration" />

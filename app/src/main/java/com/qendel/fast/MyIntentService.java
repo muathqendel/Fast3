@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +30,7 @@ import java.util.Iterator;
  * this services send  broadcast messages every 50000ms
  */
 public class MyIntentService extends IntentService {
-    public static boolean ServiceIsRun = false;
+    public static boolean ServiceIsRun = true;
     public static int CommnetID=0;
     DB_sqlite db;
     boolean not = false ;
@@ -64,6 +65,8 @@ public class MyIntentService extends IntentService {
 
     public void notification(){
         try {
+            Toast.makeText(MyIntentService.this, "ksk"+ db.get_numb(), Toast.LENGTH_SHORT).show();
+
             String url = "https://fast540.000webhostapp.com/app/notification.php?notification_id=" + db.get_numb();
             requestQueue = Volley.newRequestQueue(this);
 

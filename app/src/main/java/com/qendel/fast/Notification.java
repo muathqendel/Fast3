@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class Notification extends AppCompatActivity {
 
-    String novel_id;
+
 
     private String Search_Name ="";
     ArrayList <listitme_notification> listnovel = new ArrayList<listitme_notification>();
@@ -43,9 +43,6 @@ public class Notification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
-
-        Intent data = getIntent();
-        novel_id = data.getExtras().getString("novel_id") ;
 
         listView = (ListView) findViewById(R.id.listView);
         progressDialog = new ProgressDialog(this);

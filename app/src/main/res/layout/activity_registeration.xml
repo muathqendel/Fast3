@@ -9,35 +9,42 @@
     tools:context=".Registeration">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_user"
-                android:layout_width="150sp"
-                android:layout_height="150sp"
-                android:layout_centerHorizontal="true"
-                android:onClick="isertimg"
-                android:src="@drawable/no_img"
-                app:civ_border_color="@color/colorPrimaryDark"
-                app:civ_border_width="2dp"
-                app:civ_fill_color="@color/cardview_light_background" />
-
-
-
+                        android:layout_width="150sp"
+                        android:layout_height="150sp"
+                        android:layout_centerHorizontal="true"
+                        android:onClick="isertimg"
+                        android:src="@drawable/no_img"
+                        app:civ_border_color="@color/colorPrimaryDark"
+                        app:civ_border_width="2dp"
+                        app:civ_fill_color="@color/cardview_light_background" />
 
             <EditText
-                android:id="@+id/editText_username_r"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:ems="10"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:hint="   username"
-                android:inputType="textPersonName"
-                android:textColor="@android:color/black"
-           />
+                        android:id="@+id/editText_username_r"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:drawableLeft="@drawable/ic_person_black_24dp"
+                        android:ems="10"
+                        android:hint="   username"
+                        android:inputType="textPersonName"
+                        android:textColor="@android:color/black" />
 
-            <EditText
+
+
+    <EditText
                 android:id="@+id/editText_email_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,7 +121,51 @@
 
 
 
-            <RadioGroup
+
+    <TextView
+        android:id="@+id/textView_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:onClick="choose"
+        android:background="@drawable/edit_profile"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:gravity="left"
+        android:text= "ما نوع الخدمات التي تقدمها ..."
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textView_choose2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:onClick="choose2"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edit_profile"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"
+        android:gravity="left"
+        android:visibility="gone"
+        android:text="ما هي الخدمات التي توفرها ..." />
+
+    <EditText
+        android:id="@+id/editText_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/ic_info_black_24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:gravity="start|top"
+        android:hint="   description"
+        android:visibility="gone"
+        android:inputType="textMultiLine" />
+
+    <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,13 +174,13 @@
                 android:layout_marginRight="10dp"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="checkRadiio"
-                    android:text="Male" />
+        <RadioButton
+            android:id="@+id/radioButton_male"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="checkRadiio"
+            android:text="Male" />
 
                 <RadioButton
                     android:id="@+id/radioButton_female"
@@ -139,6 +190,50 @@
                     android:onClick="checkRadiio"
                     android:text="Female" />
             </RadioGroup>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="الخاصة بنا ؟!!.." />
+
+
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:text="الشروط والبنود " />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text=" هل انت موافق على " />
+
+
+            </LinearLayout>
+
+
 
             <CheckBox
                 android:id="@+id/checkBox_save_data_r"
@@ -182,5 +277,7 @@
                 android:text="Sign in"
                 android:textColor="@color/orange" />
 
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

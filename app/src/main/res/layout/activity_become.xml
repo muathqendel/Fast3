@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Become">
+
+
+
+    <TextView
+        android:id="@+id/textView_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:onClick="choose"
+        android:background="@drawable/edit_profile"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:gravity="left"
+        android:text= "ما نوع الخدمات التي تقدمها ..."
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textView_choose2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:onClick="choose2"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edit_profile"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"
+        android:gravity="left"
+        android:visibility="gone"
+        android:text="ما هي الخدمات التي توفرها ..." />
+
+    <EditText
+        android:id="@+id/editText_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/ic_info_black_24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:gravity="start|top"
+        android:hint="   description"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/checkBox_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="الخاصة بنا ؟!!.." />
+
+
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange"
+            android:text="الشروط والبنود " />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text=" هل انت موافق على " />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Become"
+        android:text="Become Tasker" />
+
+</LinearLayout>

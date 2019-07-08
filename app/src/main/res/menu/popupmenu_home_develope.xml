@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Car_Services"
+        android:title="خدمات سيارات "></item>
+
+    <item
+        android:id="@+id/Home_Improvement"
+        android:title="تحسين منازل"></item>
+
+    <item
+        android:id="@+id/Care"
+        android:title="العناية والرعاية"></item>
+
+    <item
+        android:id="@+id/educational_services"
+        android:title="خدمات تعلمية"></item>
+
+
+</menu>

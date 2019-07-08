@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Main3Activity">
+    android:gravity="center"
+    tools:context=".sure">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user"
-        android:textSize="30sp" />
+        android:gravity="center"
+        android:text="اهلا بك في فريق Fast \n نشكرك للمشاركة في برنامجنا تم ارسال بياناتك الي فريقنا بنجاح \n وسيتم التواصل معك باقرب وقت ممكن لتفعيل حسابك \n اهلا وسهلا بك مرة اخرى"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 </LinearLayout>

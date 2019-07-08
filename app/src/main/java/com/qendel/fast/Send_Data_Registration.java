@@ -16,7 +16,7 @@ public class Send_Data_Registration extends StringRequest {
     private Map<String, String> MapData;
 
     public Send_Data_Registration(String name, String email, String password, String ip, String imagecode ,
-                                  String adress , String sex,
+                                  String adress , String sex,String type,String info,
                                   Response.Listener <String> listener) {
         super(Method.POST, SEND_DATA_URL, listener, null);
         MapData = new HashMap<>();
@@ -27,6 +27,8 @@ public class Send_Data_Registration extends StringRequest {
         MapData.put("location",adress);
         MapData.put("sex",sex);
         MapData.put("imagecode",imagecode);
+        MapData.put("type",type);
+        MapData.put("info",info);
     }
 
     @Override

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Cleaning_houses"
+        android:title="تنظيف منازل"></item>
+
+    <item
+        android:id="@+id/Car_Cleaning"
+        android:title="تنظيف سيارات"></item>
+
+    <item
+        android:id="@+id/Cleaning_garden"
+        android:title="تنظيف حدائق"></item>
+
+    <item
+        android:id="@+id/Cleaning_of_residential_communities"
+        android:title="تنظيف تجمعات سكنية"></item>
+
+    <item
+        android:id="@+id/other_c"
+        android:title="أخرى"></item>
+
+</menu>
